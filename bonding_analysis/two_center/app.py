@@ -47,12 +47,12 @@ def main(calc_dir: str, read_icobis: bool):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run LobsterEnv Dash app.")
-    parser.add_argument("calc_path", type=str, help="Path to calculation directory")
+    parser = argparse.ArgumentParser(description="Visualize LobsterEnv environments.")
+    parser.add_argument("calc_path", type=str, help="Path to LOBSTER calculation directory")
     parser.add_argument(
         "--read-icobis",
         action="store_true",
-        help="Use ICOBILIST.lobster instead of ICOHPLIST",
+        help="Read ICOBILIST.lobster instead of default ICOHPLIST.lobster",
     )
 
     args = parser.parse_args()
