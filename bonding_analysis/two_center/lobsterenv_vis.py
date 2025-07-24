@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import warnings
-from typing import TYPE_CHECKING
 
 from dash.dependencies import Component, Input, Output
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
@@ -25,12 +23,6 @@ from crystal_toolkit.helpers.layouts import (
     get_table,
     html,
 )
-
-if TYPE_CHECKING:
-    pass
-
-warnings.filterwarnings("ignore")
-
 
 class LobsterEnvComponent(MPComponent):
     def __init__(
