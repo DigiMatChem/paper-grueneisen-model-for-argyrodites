@@ -1,3 +1,7 @@
+# Pre requisites
+
+- use the provided `requirements.txt` to install the necessary dependencies in a conda env with pythonv3.10
+
 # Descriptions of scripts
 
 - `bonding_analysis.ipynb` script will reproduce the Fig 2 of main manuscript. One just needs set the appropriate `calc_dir` path 
