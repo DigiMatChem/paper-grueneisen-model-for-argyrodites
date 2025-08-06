@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-
+import os
+import pandas as pd
 from dash.dependencies import Component, Input, Output
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 from pymatgen.analysis.graphs import MoleculeGraph
@@ -23,6 +24,7 @@ from crystal_toolkit.helpers.layouts import (
     get_table,
     html,
 )
+
 
 class LobsterEnvComponent(MPComponent):
     def __init__(
@@ -196,7 +198,10 @@ class LobsterEnvComponent(MPComponent):
             only_cation_environments=only_cation_environments
         )
 
+        save_dir_name = f"{chem_env.structure.composition.reduced_formula}"
+
         envs = []  # list of local environments
+        summary_table = []
         for site_ix, env in enumerate(lse.coordination_environments):
             if site_ix in inequivalent_indices and env[0]["ce_symbol"]:
                 # if env[0]["ce_symbol"]:
@@ -260,6 +265,10 @@ class LobsterEnvComponent(MPComponent):
 
                 # Add the charges as a site property (hover text)
                 mol = mol.add_site_property("charge", charges)
+                os.makedirs(name=save_dir_name, exist_ok=True)
+                mol.to_file(
+                    f"{save_dir_name}/{save_dir_name}_site_{site_ix}_{which_bonds}.xyz"
+                )
 
                 mg = MoleculeGraph.with_empty_graph(
                     molecule=mol,
@@ -278,14 +287,16 @@ class LobsterEnvComponent(MPComponent):
                             disable_callbacks=False,
                             id=f"{chem_env.structure.composition.reduced_formula}_site_{site_ix}",
                             scene_settings={
-                                "enableZoom": False,
-                                "defaultZoom": 0.6,
+                                "enableZoom": True,
+                                "defaultZoom": 1,
                             },
                             show_export_button=False,
                         )._sub_layouts["struct"]
                     ],
                     style={"width": "300px", "height": "300px"},
                 )
+
+                summary_table.append(data_list)
 
                 data_list.append(["Interactive", view])
 
@@ -305,6 +316,14 @@ class LobsterEnvComponent(MPComponent):
             )
             for env_group in envs_grouped
         ]
+
+        dict_rows = [
+            {item[0]: item[1] for item in row if item[0] != "Interactive"}
+            for row in summary_table
+        ]
+        pd.DataFrame(dict_rows).to_csv(
+            f"{save_dir_name}/{save_dir_name}_{which_bonds}_summary.csv"
+        )
 
         return html.Div([html.Div(analysis_contents), html.Br()])
 
