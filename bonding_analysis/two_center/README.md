@@ -1,6 +1,6 @@
 # Pre requisites
 
-- use the provided `requirements.txt` to install the necessary dependencies in a conda env with pythonv3.10
+- use the provided `requirements.txt` to install the necessary dependencies in a conda env with python v3.10
 
 # Descriptions of scripts
 
