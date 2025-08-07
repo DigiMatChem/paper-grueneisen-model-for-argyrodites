@@ -4,4 +4,4 @@
 
 # Descriptions of scripts
 
-- `ncicobi_bonding_analysis.ipynb` script will reproduce the Fig 2 of main manuscript. One just needs set the appropriate path with the LOBSTER data
+- `ncicobi_bonding_analysis.ipynb` script will reproduce the Fig 3 of main manuscript. One just needs set the appropriate path with the LOBSTER data
