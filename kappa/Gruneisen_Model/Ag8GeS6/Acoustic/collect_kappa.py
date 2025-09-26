@@ -2,13 +2,15 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Get the current working directory
 cwd = os.getcwd()
 
+# Split path and get last two folders
 path_parts = cwd.strip(os.sep).split(os.sep)
 last_two = os.path.join(path_parts[-2], path_parts[-1]) 
 
-# Collect kappa information
-temps = list(range(20, 620, 20))
+# Initialize DataFrame
+temps = list(range(0, 620, 20))
 columns = ['phxx', 'phyy', 'phzz', 'diffx', 'diffy', 'diffz', 'Totalxx', 'Totalyy', 'Totalzz']
 Ge = pd.DataFrame(index=temps, columns=columns)
 
@@ -34,13 +36,17 @@ for file in file_names:
         Ge.loc[temp, 'Totalyy'] = float(total[4])
         Ge.loc[temp, 'Totalzz'] = float(total[-1])
 
+# Compute averages
 Ge['ph'] = Ge[['phxx', 'phyy', 'phzz']].mean(axis=1)
 Ge['diff'] = Ge[['diffx', 'diffy', 'diffz']].mean(axis=1)
 Ge['Total'] = Ge[['Totalxx', 'Totalyy', 'Totalzz']].mean(axis=1)
 
+# Save to CSV
+#Ge.to_csv('kappa_Ge.csv')
 csv_filename = f'kappa_{last_two.replace("/", "_")}.csv'
 Ge.to_csv(csv_filename)
 
+# Plotting
 plt.plot(Ge.index, Ge['Total'], ':', marker='o', markerfacecolor="white", color='blue', label='Total')
 plt.plot(Ge.index, Ge['diff'], ':', marker='o', markerfacecolor="white", color='red', label='Diffuson')
 plt.plot(Ge.index, Ge['ph'], ':', marker='o', markerfacecolor="white", color='black', label='Phonon')
