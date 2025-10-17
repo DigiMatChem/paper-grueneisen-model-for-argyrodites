@@ -11,11 +11,11 @@ from mace.calculators import MACECalculator
 
 # set a device
 device = "cuda"
-strct = Structure.from_file("/home/jgeorge/automated_finetuning/scripts/POSCAR.AgGeS")
+strct = Structure.from_file("path/to/the/structure")
 
 print(strct)
 unitcell = strct.to_ase_atoms()
-unitcell.calc= MACECalculator(model_path='/home/jgeorge/finetuning/models/mace-mp-0b3-medium.model', device='cuda')
+unitcell.calc= MACECalculator(model_path='mace-mp-0b3-medium.model', device='cuda') # include the MLIP model 
 
 unitcell_filter = FrechetCellFilter(unitcell)
 opt=LBFGS(unitcell_filter)
@@ -63,7 +63,7 @@ ph3yml.read("phono3py.yaml")
 disp_dataset = ph3yml.dataset
 ph3.dataset = disp_dataset
 
-#print(set_of_forces)
+
 set_of_forces = np.array(set_of_forces)
 ph3.forces = set_of_forces.reshape(-1, len(ph3.supercell), 3)
 
