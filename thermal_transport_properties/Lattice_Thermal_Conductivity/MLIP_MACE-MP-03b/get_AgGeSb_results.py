@@ -41,7 +41,7 @@ for displacement in ph3.supercells_with_displacements:
 
         
         # Copyright by Atsushi Togo
-        cell.set_calculator(MACECalculator(model_path='/home/jgeorge/finetuning/models/mace-mp-0b3-medium.model', device='cuda'))
+        cell.set_calculator(MACECalculator(model_path='mace-mp-0b3-medium.model', device='cuda')) # include the MLIP model 
         forces = cell.get_forces()
         drift_force = forces.sum(axis=0)
         print(("[Phonopy] Drift force:" + "%11.5f" * 3) % tuple(drift_force))
