@@ -7,10 +7,10 @@ This repository provides analysis scripts and data processing tools to reproduce
 ## Repository Structure
 
 - **Bonding Analysis**  
-  Scripts to reproduce the two-center and multicenter bonding analysis results can be found in `bonding_analysis/two_center` and `bonding_analysis/multicenter`, respectively. Please refer to the `README` therein for further details.
+  Scripts to reproduce the two-center and multicenter bonding analysis results. Please refer to the `README` therein for further details on scripts.
 
 
 - **Thermal Transport Properties**  
   Contains results and scripts to reproduce the thermal transport calculations following different modeling approaches described in our work.  
-  Please refere to the `README` therein for further details.
+  Please refere to the `README` therein for further details on scripts.
 

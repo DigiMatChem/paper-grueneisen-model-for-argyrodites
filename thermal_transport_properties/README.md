@@ -2,6 +2,8 @@
 
 This repository contains the outputs and analysis scripts related to the thermal transport properties of Ag<sub>8</sub>TS<sub>6</sub> (T = Si, Ge, Sn) argyrodites.
 
+Raw data necessary for some of this scripts is available in the linked Zenodo repository.
+
 ---
 
 ## Group Velocity
