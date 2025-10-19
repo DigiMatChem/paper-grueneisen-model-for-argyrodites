@@ -29,4 +29,4 @@
 
 ## Minimum lattice thermal conductivity using harmonic phonon data (Xia model)
 
-- Code to compute this is available [here](https://github.com/yimavxia/Minikappa)
+- Code to compute the minimum lattice thermal conductivity is available in github repository from [Prof. Dr. Yi Xia](https://www.pdx.edu/profile/yi-xia) with example scripts [here](https://github.com/yimavxia/Minikappa/tree/be4c36120e631e99117a44b2200d1ac8eeb11cd4/scripts)
