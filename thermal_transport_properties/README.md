@@ -14,6 +14,7 @@ Raw data necessary for some of this scripts is available in the linked Zenodo re
 ---
 
 ## Grüneisen Parameter
+Grüneisen parameter raw data are provided in [ZENODO](https://zenodo.org/uploads/17399976). This directory includes all necessary files to generate the gruneisen_mesh.yaml file using the provided script `run_gru_mesh.sh` (located in each respective argyrodite folder). The resulting files are subsequently used to compute the average Grüneisen parameter and produce related plots.
 
 - Use the provided `phonon.yml` file to create a Python environment and install all necessary dependencies.  
 - `Grüneisen_parameter.ipynb`: example notebook for calculating the Grüneisen parameters using **pymatgen**.  
