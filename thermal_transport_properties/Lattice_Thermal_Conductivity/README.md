@@ -1,4 +1,4 @@
-# This repository provides scripts to compute two-channel–based lattice thermal conductivity (κ) using different approaches.
+# This repository provides scripts to compute two-channel–based and minimum lattice thermal conductivity (κ) ausing different approaches.
 ---
 ## Analytical Model 
 
