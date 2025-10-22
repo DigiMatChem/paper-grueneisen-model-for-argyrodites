@@ -54,6 +54,6 @@ plt.xlabel('Temperature (K)')
 plt.ylabel('Thermal Conductivity (W/mK)')
 plt.legend()
 plt.tight_layout()
-plt.savefig('kappa.pdf')
+plt.savefig('minikappa.pdf')
 plt.close()
 
