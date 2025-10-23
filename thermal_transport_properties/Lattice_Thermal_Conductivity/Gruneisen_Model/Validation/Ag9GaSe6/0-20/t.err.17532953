@@ -1,0 +1,11 @@
+Saving thermal conductivity data:   0%|          | 0/10 [00:00<?, ?it/s]/home/htc/jbustama/miniconda3/envs/Minikappa/lib/python3.12/site-packages/pymatgen/phonon/gruneisen.py:98: RuntimeWarning: divide by zero encountered in divide
+  wdkt = w * const.tera / (const.value("Boltzmann constant in Hz/K") * t)
+/home/htc/jbustama/miniconda3/envs/Minikappa/lib/python3.12/site-packages/pymatgen/phonon/gruneisen.py:101: RuntimeWarning: invalid value encountered in divide
+  w > 0, (0, const.value("Boltzmann constant in eV/K") * wdkt**2 * exp_wdkt / (exp_wdkt - 1) ** 2)
+/scratch/htc/jbustama/Argyrodites/kappa/gamma_2pi/Validation/Ag9GaSe6/0-20/conductivity.py:94: RuntimeWarning: divide by zero encountered in scalar divide
+  tau_s = (p * (gru.frequencies*const.tera*2*pi)**2 * (t / theta_d) * math.exp(-theta_d / (3 * t)))  #Lifetime in s or
+/scratch/htc/jbustama/Argyrodites/kappa/gamma_2pi/Validation/Ag9GaSe6/0-20/conductivity.py:134: RuntimeWarning: divide by zero encountered in scalar divide
+  fBE1=1.0/(np.exp(hbar*omega1/kB/temp)-1.0)
+/scratch/htc/jbustama/Argyrodites/kappa/gamma_2pi/Validation/Ag9GaSe6/0-20/conductivity.py:135: RuntimeWarning: divide by zero encountered in scalar divide
+  fBE2=1.0/(np.exp(hbar*omega2/kB/temp)-1.0)
+Saving thermal conductivity data:  10%|█         | 1/10 [25:50:33<232:34:58, 93033.21s/it]Saving thermal conductivity data:  20%|██        | 2/10 [25:52:08<85:15:08, 38363.59s/it] Saving thermal conductivity data:  30%|███       | 3/10 [25:53:05<40:35:04, 20872.06s/it]Saving thermal conductivity data:  40%|████      | 4/10 [25:53:17<21:03:40, 12636.76s/it]Saving thermal conductivity data:  50%|█████     | 5/10 [25:53:24<11:13:33, 8082.61s/it] Saving thermal conductivity data:  60%|██████    | 6/10 [25:54:38<5:57:18, 5359.67s/it] Saving thermal conductivity data:  70%|███████   | 7/10 [25:54:46<3:00:30, 3610.11s/it]Saving thermal conductivity data:  80%|████████  | 8/10 [25:56:49<1:23:19, 2499.71s/it]Saving thermal conductivity data:  90%|█████████ | 9/10 [25:56:57<28:40, 1720.75s/it]  Saving thermal conductivity data: 100%|██████████| 10/10 [28:28:13<00:00, 3991.69s/it]Saving thermal conductivity data: 100%|██████████| 10/10 [28:28:13<00:00, 10249.38s/it]

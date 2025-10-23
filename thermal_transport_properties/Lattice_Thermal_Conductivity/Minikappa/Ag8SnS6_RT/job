@@ -1,0 +1,8 @@
+#!/bin/bash
+#SBATCH -J Sn_minikappa
+#SBATCH --ntasks=1
+#SBATCH --time=144:00:00
+#SBATCH --partition=hpc-256G
+
+source activate min_kappa
+python get_minikappa.py
