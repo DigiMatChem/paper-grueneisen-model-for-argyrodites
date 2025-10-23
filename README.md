@@ -1,3 +1,5 @@
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17426472.svg)](https://doi.org/10.5281/zenodo.17426472)
 # Thermal Transport in Ag<sub>8</sub>TS<sub>6</sub> (T= Si, Ge, Sn) Argyrodites: An Integrated Experimental, Quantum-Chemical, and Computational Modelling Study
 
 
