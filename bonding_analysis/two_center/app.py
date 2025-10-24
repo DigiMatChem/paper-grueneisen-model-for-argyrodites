@@ -16,15 +16,9 @@ from lobsterenv_vis import LobsterEnvComponent
 
 def main(calc_dir: str, read_icobis: bool):
     # Load correct file based on flag
-    icohplist_file = zpath(
-        os.path.join(
-            calc_dir, "ICOBILIST.lobster" if read_icobis else "ICOHPLIST.lobster"
-        )
-    )
+    icohplist_file = zpath(os.path.join(calc_dir, "ICOBILIST.lobster" if read_icobis else "ICOHPLIST.lobster"))
 
-    icohplist_obj = Icohplist(
-        filename=icohplist_file, are_cobis=read_icobis, are_coops=False
-    )
+    icohplist_obj = Icohplist(filename=icohplist_file, are_cobis=read_icobis, are_coops=False)
 
     charge_obj = Charge(filename=zpath(os.path.join(calc_dir, "CHARGE.lobster")))
     structure_obj = Structure.from_file(zpath(os.path.join(calc_dir, "CONTCAR")))
