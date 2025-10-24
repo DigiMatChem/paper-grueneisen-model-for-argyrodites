@@ -2,10 +2,11 @@ from __future__ import annotations
 
 import os
 import pandas as pd
+import numpy as np
 from dash.dependencies import Component, Input, Output
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 from pymatgen.analysis.graphs import MoleculeGraph
-from pymatgen.core import Molecule, Structure
+from pymatgen.core import Molecule, Structure, Site, PeriodicSite
 from pymatgen.io.lobster.lobsterenv import LobsterNeighbors
 from pymatgen.io.lobster.outputs import (
     Charge,
@@ -144,9 +145,7 @@ class LobsterEnvComponent(MPComponent):
         return data
 
     @staticmethod
-    def get_lobster_local_envs(
-        charge_obj, icohplist_obj, structure_obj, which_bonds="all"
-    ) -> str:
+    def get_lobster_local_envs(charge_obj, icohplist_obj, structure_obj, which_bonds="all") -> str:
         """Get text description of local environments
 
         Args:
@@ -159,9 +158,7 @@ class LobsterEnvComponent(MPComponent):
 
         spacegroup_analyzer = SpacegroupAnalyzer(structure=structure_obj)
         symm_struct = spacegroup_analyzer.get_symmetrized_structure()
-        inequivalent_indices = [
-            indices[0] for indices in symm_struct.equivalent_indices
-        ]
+        inequivalent_indices = [indices[0] for indices in symm_struct.equivalent_indices]
         wyckoffs = symm_struct.wyckoff_symbols
 
         if which_bonds == "all":
@@ -194,9 +191,7 @@ class LobsterEnvComponent(MPComponent):
             which_charge="Mulliken",
         )
 
-        lse = chem_env.get_light_structure_environment(
-            only_cation_environments=only_cation_environments
-        )
+        lse = chem_env.get_light_structure_environment(only_cation_environments=only_cation_environments)
 
         save_dir_name = f"{chem_env.structure.composition.reduced_formula}"
 
@@ -206,9 +201,7 @@ class LobsterEnvComponent(MPComponent):
             if site_ix in inequivalent_indices and env[0]["ce_symbol"]:
                 # if env[0]["ce_symbol"]:
                 data_list = []
-                site_str = unicodeify_species(
-                    chem_env.structure[site_ix].species_string
-                )
+                site_str = unicodeify_species(chem_env.structure[site_ix].species_string)
 
                 wyckoff_pos = wyckoffs[inequivalent_indices.index(site_ix)]
                 site_cord = chem_env.structure[site_ix].frac_coords
@@ -221,13 +214,11 @@ class LobsterEnvComponent(MPComponent):
                             ["Wyckoff Positions", wyckoff_pos],
                             [
                                 "Environment",
-                                Description._coordination_environment_to_text(
-                                    env[0]["ce_symbol"]
-                                ).capitalize(),
+                                Description._coordination_environment_to_text(env[0]["ce_symbol"]).capitalize(),
                             ],
-                            ["x",site_cord[0]],
-                            ["y",site_cord[1]],
-                            ["z",site_cord[2]],
+                            ["x", site_cord[0]],
+                            ["y", site_cord[1]],
+                            ["z", site_cord[2]],
                             ["IUPAC Symbol", env[0]["ce_symbol"]],
                             ["CSM", float(round(env[0]["csm"], 5))],
                         ]
@@ -241,41 +232,49 @@ class LobsterEnvComponent(MPComponent):
                             ["Wyckoff Positions", wyckoff_pos],
                             [
                                 "Environment",
-                                Description._coordination_environment_to_text(
-                                    env[0]["ce_symbol"]
-                                ).capitalize(),
+                                Description._coordination_environment_to_text(env[0]["ce_symbol"]).capitalize(),
                             ],
-                            ["x",site_cord[0]],
-                            ["y",site_cord[1]],
-                            ["z",site_cord[2]],
+                            ["x", site_cord[0]],
+                            ["y", site_cord[1]],
+                            ["z", site_cord[2]],
                             ["IUPAC Symbol", env[0]["ce_symbol"]],
                             ["CSM", "NA"],
                         ]
                     )
 
-                local_env_data = chem_env.get_nn_info(chem_env.structure, site_ix)
-
-                neighbour_sites = [i["site"] for i in local_env_data]
-                central_site = chem_env.structure[site_ix]
-                neighbour_weights = [
-                    i["edge_properties"]["ICOHP"] for i in local_env_data
-                ]
-                charges = [charge_obj.mulliken[site_ix]]
-                charges.extend(
-                    [charge_obj.mulliken[i["site_index"]] for i in local_env_data]
+                icohp_neighbors_info = chem_env.get_info_icohps_to_neighbors(
+                    isites=[site_ix], onlycation_isites=only_cation_environments
                 )
+                neighbour_site_indexs = []
+                for atom_p in icohp_neighbors_info.atoms:
+                    for ix, atom in enumerate(atom_p):
+                        n_ix = int("".join(filter(str.isdigit, atom))) - 1
+                        if n_ix != site_ix:
+                            neighbour_site_indexs.append(n_ix)
+                neighbour_org_sites = [chem_env.structure[i] for i in neighbour_site_indexs]
+                neighbour_weights = icohp_neighbors_info.list_icohps
+
+                reordered_neighbour_weights = []
+                reordered_neigbour_sites = []
+                for site_b in chem_env.list_neighsite[site_ix]:
+                    for ix, site_a in enumerate(neighbour_org_sites):
+                        if site_a.is_periodic_image(site_b):
+                            reordered_neighbour_weights.append(neighbour_weights[ix])
+                            reordered_neigbour_sites.append(neighbour_site_indexs[ix])
+
+                central_site = chem_env.structure[site_ix]
+                charges = [charge_obj.mulliken[site_ix]]
+                charges.extend([charge_obj.mulliken[i] for i in reordered_neigbour_sites])
 
                 # Create a molecule object for the local environment
                 # and add the charges as a site property
-                mol = Molecule.from_sites([central_site, *neighbour_sites])
+                mol = Molecule.from_sites([central_site, *chem_env.list_neighsite[site_ix]])
                 mol = mol.get_centered_molecule()
 
                 # Add the charges as a site property (hover text)
                 mol = mol.add_site_property("charge", charges)
                 os.makedirs(name=save_dir_name, exist_ok=True)
-                mol.to_file(
-                    f"{save_dir_name}/{save_dir_name}_site_{site_ix}_{which_bonds}.xyz"
-                )
+                mol.to_file(f"{save_dir_name}/{save_dir_name}_site_{site_ix}_{which_bonds}.xyz")
 
                 mg = MoleculeGraph.with_empty_graph(
                     molecule=mol,
@@ -285,7 +284,7 @@ class LobsterEnvComponent(MPComponent):
                 )
                 for i in range(1, len(mol)):
                     # Add the bond strength as an edge weight (hover text)
-                    mg.add_edge(0, i, weight=neighbour_weights[i - 1])
+                    mg.add_edge(0, i, weight=reordered_neighbour_weights[i - 1])
 
                 view = html.Div(
                     [
@@ -314,9 +313,7 @@ class LobsterEnvComponent(MPComponent):
             Columns(
                 [
                     Column(
-                        html.Div(
-                            e, style={"display": "flex", "justifyContent": "center"}
-                        ),
+                        html.Div(e, style={"display": "flex", "justifyContent": "center"}),
                     )
                     for e in env_group
                 ]
@@ -324,13 +321,8 @@ class LobsterEnvComponent(MPComponent):
             for env_group in envs_grouped
         ]
 
-        dict_rows = [
-            {item[0]: item[1] for item in row if item[0] != "Interactive"}
-            for row in summary_table
-        ]
-        pd.DataFrame(dict_rows).to_csv(
-            f"{save_dir_name}/{save_dir_name}_{which_bonds}_summary.csv"
-        )
+        dict_rows = [{item[0]: item[1] for item in row if item[0] != "Interactive"} for row in summary_table]
+        pd.DataFrame(dict_rows).to_csv(f"{save_dir_name}/{save_dir_name}_{which_bonds}_summary.csv")
 
         return html.Div([html.Div(analysis_contents), html.Br()])
 
@@ -350,7 +342,5 @@ class LobsterEnvComponent(MPComponent):
                 charge_obj=data.get("charge_obj"),
                 icohplist_obj=data.get("icohplist_obj"),
                 structure_obj=data.get("structure_obj"),
-                which_bonds=(
-                    label_select if isinstance(label_select, str) else label_select[0]
-                ),
+                which_bonds=(label_select if isinstance(label_select, str) else label_select[0]),
             )
