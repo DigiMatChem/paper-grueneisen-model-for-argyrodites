@@ -261,6 +261,7 @@ class LobsterEnvComponent(MPComponent):
                         if site_a.is_periodic_image(site_b):
                             reordered_neighbour_weights.append(neighbour_weights[ix])
                             reordered_neigbour_sites.append(neighbour_site_indexs[ix])
+                            break
 
                 central_site = chem_env.structure[site_ix]
                 charges = [charge_obj.mulliken[site_ix]]
