@@ -211,6 +211,7 @@ class LobsterEnvComponent(MPComponent):
                 )
 
                 wyckoff_pos = wyckoffs[inequivalent_indices.index(site_ix)]
+                site_cord = chem_env.structure[site_ix].frac_coords
 
                 try:
                     data_list.extend(
@@ -224,6 +225,9 @@ class LobsterEnvComponent(MPComponent):
                                     env[0]["ce_symbol"]
                                 ).capitalize(),
                             ],
+                            ["x",site_cord[0]],
+                            ["y",site_cord[1]],
+                            ["z",site_cord[2]],
                             ["IUPAC Symbol", env[0]["ce_symbol"]],
                             ["CSM", float(round(env[0]["csm"], 5))],
                         ]
@@ -241,6 +245,9 @@ class LobsterEnvComponent(MPComponent):
                                     env[0]["ce_symbol"]
                                 ).capitalize(),
                             ],
+                            ["x",site_cord[0]],
+                            ["y",site_cord[1]],
+                            ["z",site_cord[2]],
                             ["IUPAC Symbol", env[0]["ce_symbol"]],
                             ["CSM", "NA"],
                         ]
