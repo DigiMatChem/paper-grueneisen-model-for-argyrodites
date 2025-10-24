@@ -173,7 +173,7 @@ pathspec==0.12.1
 pexpect==4.9.0
 pillow==11.2.1
 platformdirs==4.3.2
-playwright==1.48.0
+playwright
 plotly==6.0.1
 pluggy==1.5.0
 pre-commit==3.8.0
