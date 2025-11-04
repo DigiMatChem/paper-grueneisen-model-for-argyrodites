@@ -9,6 +9,8 @@ The corresponding raw data required to reproduce these results are available in 
 
 - It includes all experimental datasets for the Ag<sub>8</sub>TS<sub>6</sub> (T = Si, Ge, Sn) argyrodites discussed in the manuscript and Supporting Information.
 
+---
+
 ## Group Velocity
 
 
