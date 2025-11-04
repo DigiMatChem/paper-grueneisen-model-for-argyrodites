@@ -1,0 +1,61 @@
+STOE Powder Diffraction System                  NATC Report
+
+   HT_Device        : Cryostream/Cobra
+   Thermocouple     : internal
+   Max. Temperature : 126.9 °C
+
+   Parameter file   : D:\Anupama\Lt-Ag8GeS6\Lt_Ag8GeS6.natc
+
+   Temperature Steps      :        36
+   Number of Measurements :        16
+   Max. Temperature used  :  126.0 °C
+   Min. Temperature used  : -170.0 °C
+   Estimated running time : 13:44
+   Raw data file : "D:\Anupama\Lt-Ag8GeS6\Lt-Ag8GeS6.raw"
+
+   Diffractometer : Transmission
+   Radiation      : Molybdenum
+   Detector       : MYTHEN
+   Scan Mode      : Debye-Scherrer
+
+      Temperature program started at 19-06-24  18:25
+
+Elapsed  Step  Mode   Temp.  Rate  Wait  T(Avg)  T(Var)  Range  File
+  00:00     1  Ramp    20.0   6.0
+  00:04     2  Hold    20.0           1
+  00:07     3  Ramp     0.0   6.0
+  00:55     4  Hold     0.0           6   -0.07     0.1      1     1
+  00:59     5  Ramp   -20.0   6.0
+  01:45     6  Hold   -20.0           6  -20.06     0.1      1     2
+  01:48     7  Ramp   -40.0   6.0
+  02:34     8  Hold   -40.0           6  -40.05     0.0      1     3
+  02:37     9  Ramp   -60.0   6.0
+  03:24    10  Hold   -60.0           6  -60.06     0.0      1     4
+  03:27    11  Ramp   -80.0   6.0
+  04:13    12  Hold   -80.0           6  -80.05     0.0      1     5
+  04:16    13  Ramp  -100.0   6.0
+  05:02    14  Hold  -100.0           6 -100.08     0.2      1     6
+  05:05    15  Ramp  -120.0   6.0
+  05:51    16  Hold  -120.0           6 -120.08     0.1      1     7
+  05:55    17  Ramp  -140.0   5.0
+  06:42    18  Hold  -140.0           6 -140.07     0.1      1     8
+  06:44    19  Ramp  -150.0   6.0
+  07:32    20  Hold  -150.0           6 -150.06     0.1      1     9
+  07:42    21  Ramp  -170.0   2.0
+  08:35    22  Hold  -170.0           6 -170.06     0.1      1    10
+  09:10    23  Ramp    40.0   6.0
+  09:55    24  Hold    40.0           6   39.95     0.1      1    11
+  09:59    25  Ramp    60.0   6.0
+  10:41    26  Hold    60.0           3   59.95     0.1      1    12
+  10:44    27  Ramp    80.0   6.0
+  11:27    28  Hold    80.0           3   79.95     0.1      1    13
+  11:30    29  Ramp   100.0   6.0
+  12:12    30  Hold   100.0           3   99.95     0.1      1    14
+  12:19    31  Ramp   120.0   3.0
+  13:01    32  Hold   120.0           3  119.95     0.1      1    15
+  13:07    33  Ramp   126.0   1.0
+  13:49    34  Hold   126.0           3  125.95     0.1      1    16
+  14:09    35  Ramp    25.0   6.0
+  14:10    36  Hold    25.0           3
+
+       Temperature program completed at 20-06-24  08:35
