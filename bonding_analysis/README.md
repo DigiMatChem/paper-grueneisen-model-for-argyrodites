@@ -13,4 +13,4 @@ Raw data necessary for this scripts is available in the linked [![DOI](https://z
 
 ### Note on Spin Channels in the Multi-Center LOBSTER Output
 
-Due to a known issue in the LOBSTER output at the time of the calculations (LOBSTER v4.1.0), we **duplicated the first spin channel** in the analysis, while the second channel was disregarded since it was incorrectly parsed and does not contain reliable information.
+Due to a known LOBSTER output issue at the time of the calculations (LOBSTER v4.1.0), the first spin channel was duplicated during the analysis, while the second channel was disregarded because it was incorrectly parsed and does not contain reliable information.
