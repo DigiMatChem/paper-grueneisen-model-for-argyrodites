@@ -13,4 +13,4 @@ Raw data necessary for this scripts is available in the linked [![DOI](https://z
 
 ### Note on Spin Channels in the Multi-Center LOBSTER Output
 
-Due to a known LOBSTER output issue at the time of the calculations (LOBSTER v4.1.0), the first spin channel was duplicated during the analysis, while the second channel was disregarded because it was incorrectly parsed and does not contain reliable information.
+The output files resulting from multicenter bonding calculations produced by LOBSTER v4.1.0 occasionally report SPIN down-channel values inaccurately. Consequently, the SPIN up-channel was duplicated during analysis to get the correct multicenter ICOBI values.
